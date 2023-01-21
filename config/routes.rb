@@ -4,11 +4,15 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :titles, only: [:index, :show] do
+      resources :titles, except: [:new] do
         collection do
           get "/filter/(:query)", action: :index # the genre of the title
         end
       end
+      resources :reviews, except: [:index, :new]
+      resources :contents, only: [:create, :update, :destroy]
+      resources :seasons, only: [:create, :destroy, :update]
+      resources :episodes, only: [:create, :destroy, :update]
     end
   end
 end

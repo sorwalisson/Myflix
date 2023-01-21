@@ -53,7 +53,7 @@ RSpec.describe Api::V1::TitlesController, type: :controller do
       params = {query: "#{tester.genre}"} #params to the filter i've stated tester.genre to make sure it would work even if i changed the genre
       get("index", params: params)
       json = JSON.parse(response.body)
-      expect(json["data"][0]["attributes"]["name"]).to eql("Matrix")
+      expect(json[0]["name"]).to eql("Matrix")
     end
   end
   describe 'verify if the kind filters are working' do #those filters do not include the genre filters
@@ -72,7 +72,43 @@ RSpec.describe Api::V1::TitlesController, type: :controller do
       params = {query: "documentary"}
       get("index", params: params)
       json = JSON.parse(response.body)
-      expect(json["data"][0]["attributes"]["kind"]).to eql("documentary")
+      expect(json[0]["kind"]).to eql("documentary")
+    end
+  end
+  describe 'create#action' do
+    it 'it should return true if the title was created sucessfully' do
+      alice = create(:user, active: true)
+      sign_in alice
+      params = {name: "example", available: true, kind: "movie", genre: "comedy", content_rating: "12+", title_information: "justtesting"}
+      post("create", params: {title: params})
+      json = JSON.parse(response.body)
+      expect(json["sucess"]).to eql("The title was created sucessfully")
+    end
+  end
+  describe 'update#action' do
+    it 'it should return true if the title was updated sucessfully' do
+      alice = create(:user, active: true)
+      sign_in alice
+      params = {name: "example", available: true, kind: "movie", genre: "comedy", content_rating: "12+", title_information: "justtesting"}
+      post("create", params: {title: params})
+      json = JSON.parse(response.body)
+      expect(json["sucess"]).to eql("The title was created sucessfully")
+      @title = Title.first
+      patch("update", params: {id: @title.id, title: {name: "otherexample", available: true, kind: "movie", genre: "comedy", content_rating: "12+", title_information: "justtesting"}})
+      json = JSON.parse(response.body)
+      expect(json["sucess"]).to eql("The title was updated sucessfully")
+      @title.reload
+      expect(@title.name).to eql("otherexample")
+    end
+  end
+  describe 'destroy#action' do
+    it 'it shoudl return true if the title was updated sucessfully' do
+      alice = create(:user, active: true)
+      sign_in alice
+      tester = create(:title)
+      delete("destroy", params: {id: tester.id})
+      json = JSON.parse(response.body)
+      expect(json["sucess"]).to eql("The title was destroyed sucessfully")
     end
   end
 end

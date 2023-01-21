@@ -27,7 +27,7 @@ gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
-gem 'jsonapi-serializer'
+gem 'active_model_serializers', '~> 0.10.0'
 
 gem 'devise'
 

@@ -6,7 +6,4 @@ class Season < ApplicationRecord
 
   validates_with SeasonValidator
 
-  def testing
-    Episode.where(seasons_id: self.id)
-  end
 end
