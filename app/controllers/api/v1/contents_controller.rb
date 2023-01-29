@@ -2,6 +2,7 @@ module Api
   module V1  
     class ContentsController < ApplicationController
       before_action :displayerror1
+      before_action :check_admin, only: [:create, :update, :destroy]
 
       def create
         @content = Content.create(content_params)

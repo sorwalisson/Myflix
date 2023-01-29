@@ -8,6 +8,7 @@ Rails.application.routes.draw do
         collection do
           get "/filter/(:query)", action: :index # the genre of the title
         end
+        resource :favorites, only: [:create, :destroy]
       end
       resources :reviews, except: [:index, :new]
       resources :contents, only: [:create, :update, :destroy]

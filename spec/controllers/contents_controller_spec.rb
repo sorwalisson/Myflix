@@ -4,7 +4,7 @@ RSpec.describe Api::V1::ContentsController, type: :controller do
   describe 'action#create' do
     it 'should return true if the content is created and valid for the specific kind of title' do
       tester = create(:title)
-      alice = create(:user, active: true)
+      alice = create(:user, active: true, admin: true)
       sign_in alice
       params = {video_url: "test.com", title_id: tester.id}
       post("create", params: {content: params})
@@ -13,7 +13,7 @@ RSpec.describe Api::V1::ContentsController, type: :controller do
     end
     it 'should return true if the content is not created due to validation' do
       tester = create(:title)
-      alice = create(:user, active: true)
+      alice = create(:user, active: true, admin: true)
       sign_in alice
       params = {title_id: tester.id}
       post("create", params: {content: params})
@@ -25,7 +25,7 @@ RSpec.describe Api::V1::ContentsController, type: :controller do
   describe 'action#update' do
     it 'should return true if the content is updated sucessfully' do
       tester = create(:title)
-      alice = create(:user, active: true)
+      alice = create(:user, active: true, admin: true)
       sign_in alice
       params = {video_url: "test.com", title_id: tester.id}
       post("create", params: {content: params})
@@ -42,7 +42,7 @@ RSpec.describe Api::V1::ContentsController, type: :controller do
   describe 'action#destroy' do
     it 'shoudl return true if the content was destroyed sucessfully' do
       tester = create(:title)
-      alice = create(:user, active: true)
+      alice = create(:user, active: true, admin: true)
       sign_in alice
       params = {video_url: "test.com", title_id: tester.id}
       post("create", params: {content: params})

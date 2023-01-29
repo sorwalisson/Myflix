@@ -31,4 +31,24 @@ class ApplicationController < ActionController::Base
   def destroysucces(source)
     render json: {sucess: "The #{source} was destroyed sucessfully"}
   end
+
+  def msgnotadmin
+    render json: {sucess: "Only admins may acess this section"}
+  end
+
+  def check_admin
+    return msgnotadmin() unless current_user.admin?
+  end
+
+  def sucessf
+    render json: {sucess: "The movie was added to your favorites sucessfully"}
+  end
+  
+  def failedf
+    render json: {error: "Unknown Error"}
+  end
+  
+  def destroyf
+    render json: {sucess: "The movie was removed from your favorites sucessfully"}
+  end
 end

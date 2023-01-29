@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Api::V1::EpisodesController, type: :controller do
   describe 'action#create' do
     it 'it should return true if the episode was created sucessfully' do
-      alice = create(:user)
+      alice = create(:user, active: true, admin: true)
       sign_in alice
       tester = create(:title, kind: "show")
       ctester = Content.create(title_id: tester.id)
@@ -16,7 +16,7 @@ RSpec.describe Api::V1::EpisodesController, type: :controller do
   end
   describe 'action#update' do
     it 'should return true if the episode was updated sucessfully' do
-      alice = create(:user)
+      alice = create(:user, active: true, admin: true)
       sign_in alice
       tester = create(:title, kind: "show")
       ctester = Content.create(title_id: tester.id)
@@ -35,7 +35,7 @@ RSpec.describe Api::V1::EpisodesController, type: :controller do
   end
   describe 'action#destroy' do
     it 'should return true if the episode was destroyed sucessfully' do
-      alice = create(:user)
+      alice = create(:user, active: true, admin: true)
       sign_in alice
       tester = create(:title, kind: "show")
       ctester = Content.create(title_id: tester.id)

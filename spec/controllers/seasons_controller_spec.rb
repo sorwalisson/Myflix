@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Api::V1::SeasonsController, type: :controller do
   describe 'action#create' do
     it 'should return true if the season was created sucessfully' do
-      alice = create(:user, active: true)
+      alice = create(:user, active: true, admin: true)
       sign_in alice
       tester = create(:title, kind: 'show')
       ctester = Content.create(title_id: tester.id)
@@ -15,7 +15,7 @@ RSpec.describe Api::V1::SeasonsController, type: :controller do
   end
   describe 'action#update' do
     it 'should return true if the season was update sucessfully' do
-      alice = create(:user, active: true)
+      alice = create(:user, active: true, admin: true)
       sign_in alice
       tester = create(:title, kind: 'show')
       ctester = Content.create(title_id: tester.id)
@@ -33,7 +33,7 @@ RSpec.describe Api::V1::SeasonsController, type: :controller do
   end
   describe 'action#destroy' do
     it 'shoudl return true if the season was destroyed sucessfully' do
-      alice = create(:user, active: true)
+      alice = create(:user, active: true, admin: true)
       sign_in alice
       tester = create(:title, kind: 'show')
       ctester = Content.create(title_id: tester.id)

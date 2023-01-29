@@ -2,6 +2,7 @@ module Api
   module V1
     class EpisodesController < ApplicationController
       before_action :displayerror1
+      before_action :check_admin, only: [:create, :update, :destroy]
 
       def create
         @episode = Episode.create(episode_params)

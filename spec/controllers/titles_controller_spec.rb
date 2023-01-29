@@ -77,7 +77,7 @@ RSpec.describe Api::V1::TitlesController, type: :controller do
   end
   describe 'create#action' do
     it 'it should return true if the title was created sucessfully' do
-      alice = create(:user, active: true)
+      alice = create(:user, active: true, admin: true)
       sign_in alice
       params = {name: "example", available: true, kind: "movie", genre: "comedy", content_rating: "12+", title_information: "justtesting"}
       post("create", params: {title: params})
@@ -87,7 +87,7 @@ RSpec.describe Api::V1::TitlesController, type: :controller do
   end
   describe 'update#action' do
     it 'it should return true if the title was updated sucessfully' do
-      alice = create(:user, active: true)
+      alice = create(:user, active: true, admin: true)
       sign_in alice
       params = {name: "example", available: true, kind: "movie", genre: "comedy", content_rating: "12+", title_information: "justtesting"}
       post("create", params: {title: params})
@@ -103,7 +103,7 @@ RSpec.describe Api::V1::TitlesController, type: :controller do
   end
   describe 'destroy#action' do
     it 'it shoudl return true if the title was updated sucessfully' do
-      alice = create(:user, active: true)
+      alice = create(:user, active: true, admin: true)
       sign_in alice
       tester = create(:title)
       delete("destroy", params: {id: tester.id})

@@ -2,6 +2,7 @@ module Api
   module V1
     class SeasonsController < ApplicationController
       before_action :displayerror1
+      before_action :check_admin, only: [:create, :update, :destroy]
 
       def create
         @season = Season.create(season_params)

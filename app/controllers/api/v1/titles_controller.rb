@@ -2,6 +2,7 @@ module Api
   module V1
     class TitlesController < ApplicationController
       before_action :displayerror1
+      before_action :check_admin, except: [:index, :show]
       def index
         titles = TitlesQuery.new(params: params[:query]).call
         return displayerror2() unless titles.exists?
