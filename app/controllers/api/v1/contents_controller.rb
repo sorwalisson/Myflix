@@ -7,9 +7,9 @@ module Api
       def create
         @content = Content.create(content_params)
         if @content.valid? 
-          sucessmsg(source = "content")
+          render json: {sucess: "The content was created sucessfully"}
         else
-          failedmsg(source = "content")
+          render json: {error: "The content was not saved"}, status: 442
         end
       end
 
@@ -17,15 +17,15 @@ module Api
         content = Content.find_by(id: params[:id])
         content.update(content_params)
         if content.valid?
-          sucessupdate(source = "content")
+          render json: {sucess: "The content was updated sucessfully"}
         else
-          failedupdate(source = "content")
+          render json: {error: "The content review was not updated"}
         end
       end
 
       def destroy
         content = Content.find_by(id: params[:id])
-        if content.destroy() then destroysucces(source = "content") end
+        if content.destroy() then render json: {sucess: "The content was destroyed sucessfully"} end
       end
 
       private

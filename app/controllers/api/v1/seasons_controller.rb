@@ -7,24 +7,24 @@ module Api
       def create
         @season = Season.create(season_params)
         if @season.valid?
-          sucessmsg(source = "season")
+          render json: {sucess: "The season was created sucessfully"}
         else
-          failedmsg(source = "season")
+          render json: {error: "The season was not saved"}, status: 442
         end
       end
 
       def update
         @season = Season.find_by(id: params[:id])
         if @season.update(season_params)
-          sucessupdate(source = "season")
+          render json: {sucess: "The season was updated sucessfully"}
         else
-          failedupdate(source = "season")
+          render json: {error: "The season was not updated"}
         end
       end
 
       def destroy
         @season = Season.find_by(id: params[:id])
-        if @season.destroy then destroysucces(source = "season") end
+        if @season.destroy then render json: {sucess: "The season was destroyed sucessfully"} end
       end
 
 

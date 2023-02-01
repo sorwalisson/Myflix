@@ -6,21 +6,21 @@ module Api
       def create
         review = Review.create(review_params)
         if review.valid?  
-          sucessmsg(source = "review")
+          render json: {sucess: "The review was created sucessfully"}
         else
-          failedmsg(source = "review")
+          render json: {error: "The review was not saved"}, status: 442
         end
       end
 
       def update
         review = Review.find_by(id: params[:id])
         review.update(review_params)
-        if review.valid? then sucessupdate(source = "review") end
+        if review.valid? then render json: {sucess: "The review was updated sucessfully"} end
       end
 
       def destroy
         review = Review.find_by(id: params[:id])
-          if review.destroy then destroysucces(source = 'review') end
+          if review.destroy then render json: {sucess: "The review was destroyed sucessfully"} end
       end
 
       private

@@ -7,24 +7,24 @@ module Api
       def create
         @episode = Episode.create(episode_params)
         if @episode.valid?
-          sucessmsg(source = "episode")
+          render json: {sucess: "The episode was created sucessfully"}
         else
-          failedmsg(source = "episode")
+          render json: {error: "The episode was not saved"}, status: 442
         end
       end
 
       def update
         @episode = Episode.find_by(id: params[:id])
         if @episode.update(episode_params)
-          sucessupdate(source = "episode")
+          render json: {sucess: "The episode was updated sucessfully"}
         else
-          failedupdate(source = "episode")
+          render json: {error: "The episode was not updated"}
         end
       end
 
       def destroy
         @episode = Episode.find_by(id: params[:id])
-        if @episode.destroy then destroysucces(source = "episode") end
+        if @episode.destroy then render json: {sucess: "The episode was destroyed sucessfully"} end
       end
 
       private
